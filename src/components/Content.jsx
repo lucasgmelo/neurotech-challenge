@@ -1,53 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { FiTrash } from 'react-icons/fi';
-import api from '../services/api';
+import { getTasks, deleteTask } from '../services/api';
 import { MyAside, Main, Tasklist } from '../styles/dashboardStyles';
 import { Todo } from '../styles/global';
 
 export default function Content({ onOpenNewTaskModal }) {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState('');
-  const myToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODcxOTAzMywiZXhwIjoxNjE4ODA1NDMzfQ.ZW9d3-eHWkGwp-fGQZG5LUczOfAkeWnquClr4f_wfGg';
-
-  const getTodos = async (token) => {
-    try {
-      // const token = localStorage.getItem('doit_token');
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const response = await api.get('/todos', config);
-      if (response.status === 200) {
-        setTasks(response.data);
-        return true;
-      }
-      return false;
-    } catch (err) {
-      return false;
-    }
-  };
-
-  const deleteTask = async (id, token) => {
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const response = await api.delete(`/todos/${id}`, config);
-      if (response.status === 200) {
-        getTodos(token);
-        return true;
-      }
-      return false;
-    } catch (err) {
-      return false;
-    }
-  };
+  const myToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODc4OTk3MiwiZXhwIjoxNjE4ODc2MzcyfQ.nop5fBGeGCYW-C6B_2TbJaGrIJtsi06hHS-F-VmCUKM';
 
   useEffect(() => {
-    getTodos(myToken);
+    getTasks(myToken);
   }, []);
 
   return (
