@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import { FiTrash } from "react-icons/fi";
-import { api } from "../services/api";
-import { MyAside, Main, Tasklist } from "../styles/dashboardStyles";
-import { Todo } from "../styles/global";
+import React, { useEffect, useState } from 'react';
+import { FiTrash } from 'react-icons/fi';
+import api from '../services/api';
+import { MyAside, Main, Tasklist } from '../styles/dashboardStyles';
+import { Todo } from '../styles/global';
 
-export function Content() {
+export default function Content() {
   const [tasks, setTasks] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const getTodos = async (token) => {
     try {
       // const token = localStorage.getItem('doit_token');
       const config = {
         headers: {
-          Authorization: "Bearer " + token,
+          Authorization: `Bearer ${token}`,
         },
       };
-      const response = await api.get("/todos", config);
+      const response = await api.get('/todos', config);
       if (response.status === 200) {
         setTasks(response.data);
         return true;
@@ -27,9 +27,29 @@ export function Content() {
       return false;
     }
   };
+
+  const deleteTask = async (id, token) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await api.post(`/todos/${id}`, config);
+      if (response.status === 200) {
+        getTodos(token);
+        return true;
+      }
+      return false;
+    } catch (err) {
+      setError(err);
+      return false;
+    }
+  };
+
   useEffect(() => {
     getTodos(
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODcxOTAzMywiZXhwIjoxNjE4ODA1NDMzfQ.ZW9d3-eHWkGwp-fGQZG5LUczOfAkeWnquClr4f_wfGg"
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODcxOTAzMywiZXhwIjoxNjE4ODA1NDMzfQ.ZW9d3-eHWkGwp-fGQZG5LUczOfAkeWnquClr4f_wfGg',
     );
   }, []);
 
@@ -51,66 +71,28 @@ export function Content() {
       <Main>
         <h1>Minhas tasks</h1>
         <Tasklist>
-          <Todo>
-            <div>
-              <h2>{tasks[0]?.title}</h2>
-              <p>
-                {tasks[0]?.description}
-              </p>
-              <span>#{tasks[0]._id}</span>
-            </div>
-            <button>
-              <FiTrash size={18} />
-            </button>
-          </Todo>
-          <Todo>
-            <div>
-              <h2>Passear com o cachorro</h2>
-              <p>
-                Andar com ele pela rua, uma vez ao dia, durante toda a semana.
-              </p>
-              <span>#idDoUsuario</span>
-            </div>
-            <button>
-              <FiTrash size={18} />
-            </button>
-          </Todo>
-          <Todo>
-            <div>
-              <h2>Passear com o cachorro</h2>
-              <p>
-                Andar com ele pela rua, uma vez ao dia, durante toda a semana.
-              </p>
-              <span>#idDoUsuario</span>
-            </div>
-            <button>
-              <FiTrash size={18} />
-            </button>
-          </Todo>
-          <Todo>
-            <div>
-              <h2>Passear com o cachorro</h2>
-              <p>
-                Andar com ele pela rua, uma vez ao dia, durante toda a semana.
-              </p>
-              <span>#idDoUsuario</span>
-            </div>
-            <button>
-              <FiTrash size={18} />
-            </button>
-          </Todo>
-          <Todo>
-            <div>
-              <h2>Passear com o cachorro</h2>
-              <p>
-                Andar com ele pela rua, uma vez ao dia, durante toda a semana.
-              </p>
-              <span>#idDoUsuario</span>
-            </div>
-            <button>
-              <FiTrash size={18} />
-            </button>
-          </Todo>
+          {tasks.map((task) => (
+            <Todo>
+              <div>
+                <h2>{task?.title}</h2>
+                <p>{task?.description}</p>
+                <span>
+                  #
+                  {task._id}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={deleteTask(
+                  task._id,
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODcxOTAzMywiZXhwIjoxNjE4ODA1NDMzfQ.ZW9d3-eHWkGwp-fGQZG5LUczOfAkeWnquClr4f_wfGg',
+                )}
+              >
+                <FiTrash size={18} />
+              </button>
+            </Todo>
+          ))}
+          {error}
         </Tasklist>
       </Main>
     </>

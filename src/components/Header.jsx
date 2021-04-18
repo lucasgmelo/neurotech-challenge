@@ -1,13 +1,14 @@
-import { useHistory } from "react-router-dom";
-import { MyHeader } from "../styles/dashboardStyles";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { MyHeader } from '../styles/dashboardStyles';
 
-export function Header() {
+export default function Header() {
   const history = useHistory();
 
   return (
     <MyHeader>
       <div>
-        <button type="button" onClick={() => history.push("/")}>
+        <button type="button" onClick={() => history.push('/')}>
           <img src="/images/exit.svg" alt="Sair" />
           <p>Sair</p>
         </button>

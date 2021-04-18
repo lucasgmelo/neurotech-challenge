@@ -18,8 +18,8 @@ module.exports = {
     'react',
   ],
   rules: {
-    required: {
-      some: ['nesting', 'id'],
-    },
+    'no-unused-vars': 'off',
+    'no-underscore-dangle': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
   },
 };

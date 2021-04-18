@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { api } from "../services/api";
-import { Button, Error, Input } from "../styles/global";
-import { LoginContainer } from "../styles/loginStyles";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+// import api from '../services/api';
+import { Button, Error, Input } from '../styles/global';
+import LoginContainer from '../styles/loginStyles';
 
 export default function Login() {
   const history = useHistory();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   return (
     <LoginContainer>
@@ -18,7 +18,7 @@ export default function Login() {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          if (!error) history.push("/dashboard");
+          if (!error) history.push('/dashboard');
         }}
       >
         <label htmlFor="email">Email</label>
@@ -36,7 +36,11 @@ export default function Login() {
           onChange={({ target }) => setPassword(target.value)}
         />
         <Error>
-          Senha incorreta. {email} {password}
+          Senha incorreta.
+          {' '}
+          {email}
+          {' '}
+          {password}
         </Error>
         <Button>Continuar</Button>
       </form>

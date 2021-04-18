@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const MyHeader = styled.header`
   height: 60px;
@@ -45,7 +45,6 @@ export const DashboardContainer = styled.div`
     grid-column: 1/3;
   }
 `;
-
 
 export const MyAside = styled.div`
   display: flex;

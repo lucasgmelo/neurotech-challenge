@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const LoginContainer = styled.div`
+const LoginContainer = styled.div`
   display: grid;
   grid-template-columns: .9fr 1fr;
 
@@ -30,3 +30,5 @@ export const LoginContainer = styled.div`
   }
 
 `;
+
+export default LoginContainer;
