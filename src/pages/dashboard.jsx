@@ -1,13 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Input } from '../styles/global';
-import { LoginContainer } from '../styles/loginStyles';
+// import { LoginContainer } from '../styles/loginStyles';
 
-export default function Login() {
+export default function Dashboard() {
   const history = useHistory();
 
   return (
-    <LoginContainer>
+    <>
+      <>
         <strong>do it!</strong>
         <img src="/images/desktop_logo.svg" alt="logo" />
         <form
@@ -22,6 +23,7 @@ export default function Login() {
           <Input required id="password" type="password" />
           <Button>Continuar</Button>
         </form>
-    </LoginContainer>
+      </>
+    </>
   );
 }
