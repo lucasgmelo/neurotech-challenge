@@ -21,5 +21,6 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-underscore-dangle': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
+    'react/prop-types': 'off',
   },
 };
