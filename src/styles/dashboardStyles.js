@@ -80,9 +80,41 @@ export const Main = styled.main`
   padding: 2rem 1rem;
   flex: 1;
 
+  & > div {
+    display: flex;
+    justify-content: space-between;
+
   h1 {
     margin-bottom: 1rem;
   }
+
+  button {
+    font-weight: 600;
+    font-size: 1.375rem;
+    line-height: 2rem;
+
+    border: 0;
+    border-radius: 50%;
+    outline: none;
+
+    width: 30px;
+    height: 30px;
+
+    background: var(--gradient);
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s;
+
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
+  }
+
 `;
 
 export const Tasklist = styled.ul`

@@ -67,7 +67,14 @@ export default function Content() {
         </footer>
       </MyAside>
       <Main>
-        <h1>Minhas tasks</h1>
+        <div>
+          <h1>Minhas tasks</h1>
+          <button
+            type="submit"
+          >
+            +
+          </button>
+        </div>
         <Tasklist>
           {tasks.map((task) => (
             <Todo key={task._id}>
