@@ -18,5 +18,8 @@ module.exports = {
     'react',
   ],
   rules: {
+    required: {
+      some: ['nesting', 'id'],
+    },
   },
 };
