@@ -163,3 +163,8 @@ export const Todo = styled.li`
     }
   }
 `;
+
+export const Error = styled.p`
+  font-weight: 600;
+  color: #5CEDAE ;
+`;

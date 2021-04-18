@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Input } from '../styles/global';
+import { Button, Error, Input } from '../styles/global';
 import { LoginContainer } from '../styles/loginStyles';
 
 export default function Login() {
@@ -20,6 +20,7 @@ export default function Login() {
           <Input required id="email" type="text" />
           <label htmlFor="password">Senha</label>
           <Input required id="password" type="password" />
+          <Error>Senha incorreta.</Error>
           <Button>Continuar</Button>
         </form>
     </LoginContainer>
