@@ -4,7 +4,7 @@ import api from '../services/api';
 import { MyAside, Main, Tasklist } from '../styles/dashboardStyles';
 import { Todo } from '../styles/global';
 
-export default function Content() {
+export default function Content({ onOpenNewTaskModal }) {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState('');
   const myToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODcxOTAzMywiZXhwIjoxNjE4ODA1NDMzfQ.ZW9d3-eHWkGwp-fGQZG5LUczOfAkeWnquClr4f_wfGg';
@@ -38,7 +38,6 @@ export default function Content() {
       const response = await api.delete(`/todos/${id}`, config);
       if (response.status === 200) {
         getTodos(token);
-        console.log(response);
         return true;
       }
       return false;
@@ -71,6 +70,7 @@ export default function Content() {
           <h1>Minhas tasks</h1>
           <button
             type="submit"
+            onClick={onOpenNewTaskModal}
           >
             +
           </button>
