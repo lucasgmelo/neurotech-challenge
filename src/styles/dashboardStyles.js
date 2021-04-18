@@ -45,3 +45,48 @@ export const DashboardContainer = styled.div`
     grid-column: 1/3;
   }
 `;
+
+
+export const MyAside = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  background: var(--bg-light);
+
+  height: 100%;
+
+  padding: 2rem 1rem;
+
+  border-radius: 0 0 0 8px;
+
+  & > header {
+    h1 {
+      margin: 1.5rem 0;
+    }
+  }
+
+  & > footer {
+    display: flex;
+    align-items: flex-end;
+
+    div {
+      margin-left: 1rem;
+    }
+  }
+`;
+
+export const Main = styled.main`
+  padding: 2rem 1rem;
+  flex: 1;
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+`;
+
+export const Tasklist = styled.ul`
+  max-height: 95%;
+  overflow-y: auto;
+`;
