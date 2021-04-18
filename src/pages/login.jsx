@@ -11,14 +11,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = async (email, password) => {
-    const res = await api.post("/login", {
-      email: email,
-      password: password,
-    });
-    return res.data;
-  };
-
   return (
     <LoginContainer>
       <strong>do it!</strong>
@@ -26,7 +18,6 @@ export default function Login() {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          handleLogin(email, password);
           if (!error) history.push("/dashboard");
         }}
       >
