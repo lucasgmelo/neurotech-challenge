@@ -153,6 +153,10 @@ export const Button = styled.button`
 
   font-size: 0.9rem;
   font-weight: 500;
+
+  &:hover {
+        filter: brightness(0.9);
+      }
 `;
 
 export const Todo = styled.li`
