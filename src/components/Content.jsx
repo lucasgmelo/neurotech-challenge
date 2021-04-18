@@ -7,6 +7,7 @@ import { Todo } from '../styles/global';
 export default function Content() {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState('');
+  const myToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODcxOTAzMywiZXhwIjoxNjE4ODA1NDMzfQ.ZW9d3-eHWkGwp-fGQZG5LUczOfAkeWnquClr4f_wfGg';
 
   const getTodos = async (token) => {
     try {
@@ -23,7 +24,6 @@ export default function Content() {
       }
       return false;
     } catch (err) {
-      setError(err);
       return false;
     }
   };
@@ -35,22 +35,20 @@ export default function Content() {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await api.post(`/todos/${id}`, config);
+      const response = await api.delete(`/todos/${id}`, config);
       if (response.status === 200) {
         getTodos(token);
+        console.log(response);
         return true;
       }
       return false;
     } catch (err) {
-      setError(err);
       return false;
     }
   };
 
   useEffect(() => {
-    getTodos(
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODcxOTAzMywiZXhwIjoxNjE4ODA1NDMzfQ.ZW9d3-eHWkGwp-fGQZG5LUczOfAkeWnquClr4f_wfGg',
-    );
+    getTodos(myToken);
   }, []);
 
   return (
@@ -72,21 +70,18 @@ export default function Content() {
         <h1>Minhas tasks</h1>
         <Tasklist>
           {tasks.map((task) => (
-            <Todo>
+            <Todo key={task._id}>
               <div>
                 <h2>{task?.title}</h2>
                 <p>{task?.description}</p>
                 <span>
                   #
-                  {task._id}
+                  {task?._id}
                 </span>
               </div>
               <button
                 type="button"
-                onClick={deleteTask(
-                  task._id,
-                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODcxOTAzMywiZXhwIjoxNjE4ODA1NDMzfQ.ZW9d3-eHWkGwp-fGQZG5LUczOfAkeWnquClr4f_wfGg',
-                )}
+                onClick={() => deleteTask(task?._id, myToken)}
               >
                 <FiTrash size={18} />
               </button>
