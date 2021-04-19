@@ -22,5 +22,6 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
     'react/prop-types': 'off',
+    'max-len': 'off',
   },
 };
