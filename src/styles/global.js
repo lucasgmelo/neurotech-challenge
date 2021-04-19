@@ -79,6 +79,10 @@ h1, label {
   color: #ee69ac;
 }
 
+.swal2-confirm {
+  min-width: 150px;
+}
+
 .react-modal-overlay {
         background: rgba(0, 0, 0, 0.5);
 
