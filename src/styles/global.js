@@ -75,6 +75,10 @@ h1, label {
     font-weight: 600;
 }
 
+.swal2-title {
+  color: #ee69ac;
+}
+
 .react-modal-overlay {
         background: rgba(0, 0, 0, 0.5);
 

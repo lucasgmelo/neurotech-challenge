@@ -13,10 +13,10 @@ api.interceptors.response.use(
       // window.location = '/';
       swal.fire({
         title: 'Sessão expirada',
-        text: 'Sua sessão foi expirada. Você gostaria de ser redirecionado para a página de login??',
+        text: 'Sua sessão foi expirada. Você gostaria de ser redirecionado para a página de login?',
         type: 'warning',
         showCancelButton: true,
-        confirmButtonColor: 'linear-gradient(249.73deg, #f29682 0%, #ee69ac 50%, #cb4bcf 100%)',
+        confirmButtonColor: '#ee69ac',
         confirmButtonText: 'Sim',
         closeOnConfirm: false,
         background: '#16161c',
