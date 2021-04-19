@@ -11,6 +11,7 @@ export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(false);
   const [username, setUsername] = useState('');
+  const [loading, setLoading] = useState(false);
 
   async function getUser() {
     const userId = JSON.parse(localStorage.getItem('doit_user_id'));
