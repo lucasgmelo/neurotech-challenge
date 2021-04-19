@@ -12,11 +12,34 @@ export function TasksProvider({ children }) {
   const [error, setError] = useState(false);
   const [userData, setUserData] = useState('');
 
-  async function getUser() {
+  async function validateToken() {
+    const config = {
+      headers: {
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODgwNDU5NywiZXhwIjoxNjE4ODkwOTk3fQ.arjkk_E7cVeTwd4xAE-vnUnft9wfxAs0x_WsUTMkldI',
+      },
+    };
     try {
-      const response = await api.get('/users/607a60d09d576213acdf2b68');
+      const response = await api.all('/todos', config);
       if (response.status === 200) {
-        // setUserData(response.data);
+        console.log(response);
+        return true;
+      }
+      return false;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  async function getUser() {
+    const config = {
+      headers: {
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODgwNDU5NywiZXhwIjoxNjE4ODkwOTk3fQ.arjkk_E7cVeTwd4xAE-vnUnft9wfxAs0x_WsUTMkldI',
+      },
+    };
+    try {
+      const response = await api.get('/users', config);
+      if (response.status === 200) {
+        console.log(response);
         return true;
       }
       return false;
@@ -104,7 +127,7 @@ export function TasksProvider({ children }) {
 
   return (
     <TasksContext.Provider value={{
-      tasks, setTasks, getTasks, deleteTask, createTask, login, error, setError, userData, getUser,
+      tasks, setTasks, getTasks, deleteTask, createTask, login, error, setError, userData, getUser, validateToken,
     }}
     >
       {children}

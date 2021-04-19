@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import useMedia from '../hooks/useMedia';
 import { useTasks } from '../hooks/useTasks';
 import { Button, Error, Input } from '../styles/global';
 import LoginContainer from '../styles/loginStyles';
 
 export default function Login() {
+  const mobile = useMedia('(max-width: 720px)');
   const history = useHistory();
 
   const [email, setEmail] = useState('');
@@ -15,8 +17,14 @@ export default function Login() {
 
   return (
     <LoginContainer>
-      <strong>do it!</strong>
-      <img src="/images/desktop_logo.svg" alt="logo" />
+      <strong>
+        do it!
+      </strong>
+      {mobile ? (
+        <img src="/images/mobile_logo.svg" alt="logo" />
+      ) : (
+        <img src="/images/desktop_logo.svg" alt="logo" />
+      )}
       <form
         onSubmit={(event) => {
           event.preventDefault();
