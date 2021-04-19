@@ -35,7 +35,7 @@ export const DashboardContainer = styled.div`
   grid-template-columns: 30% 70%;
 
   background: var(--bg-dark);
-  height: 35rem;
+  height: 43rem;
 
   margin: 2rem;
   border-radius: 8px;
@@ -43,6 +43,11 @@ export const DashboardContainer = styled.div`
   & > header {
     grid-row: 1;
     grid-column: 1/3;
+  }
+
+  @media (max-width: 720px) {
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -74,6 +79,12 @@ export const MyAside = styled.div`
       margin-left: 1rem;
     }
   }
+
+  @media (max-width: 720px) {
+    height: auto;
+    padding: 0 1rem;
+    background: var(--bg-dark);
+  }
 `;
 
 export const Main = styled.main`
@@ -84,40 +95,62 @@ export const Main = styled.main`
     display: flex;
     justify-content: space-between;
 
-  h1 {
-    margin-bottom: 1rem;
-  }
+    h1 {
+      margin-bottom: 1rem;
+    }
 
-  button {
-    font-weight: 600;
-    font-size: 1.375rem;
-    line-height: 2rem;
+    button {
+      font-weight: 600;
+      font-size: 1.375rem;
+      line-height: 2rem;
 
-    border: 0;
-    border-radius: 50%;
-    outline: none;
+      border: 0;
+      border-radius: 50%;
+      outline: none;
 
-    width: 30px;
-    height: 30px;
+      width: 30px;
+      height: 30px;
 
-    background: var(--gradient);
-    color: #fff;
+      background: var(--gradient);
+      color: #fff;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-    transition: all 0.2s;
+      transition: all 0.2s;
 
-    &:hover {
-      filter: brightness(0.8);
+      &:hover {
+        filter: brightness(0.8);
+      }
     }
   }
-  }
 
+  @media (max-width: 720px) {
+    padding: 0 1rem;
+    max-height: 32rem;
+
+    h1 {
+      text-transform: uppercase;
+      font-size: 1.125rem;
+      font-weight: 400;
+    }
+
+    div button {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+
+      height: 40px;
+      width: 40px;
+
+      font-size: 1.625rem;
+    }
+  }
 `;
 
 export const Tasklist = styled.ul`
+  flex: 1;
   max-height: 95%;
   overflow-y: auto;
 `;
