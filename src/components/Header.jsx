@@ -1,9 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useTasks } from '../hooks/useTasks';
 import { MyHeader } from '../styles/dashboardStyles';
 
 export default function Header() {
   const history = useHistory();
+  const { logout, getTasks } = useTasks();
 
   return (
     <MyHeader>
@@ -11,7 +13,7 @@ export default function Header() {
         <button
           type="button"
           onClick={() => {
-            localStorage.removeItem('doit_token');
+            logout();
             history.push('/');
           }}
         >

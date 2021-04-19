@@ -8,7 +8,6 @@ export default function NewTaskModal({ isOpen, onRequestClose }) {
   const [task, setTask] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
-  const myToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODgwNDU5NywiZXhwIjoxNjE4ODkwOTk3fQ.arjkk_E7cVeTwd4xAE-vnUnft9wfxAs0x_WsUTMkldI';
   const { createTask } = useTasks();
 
   function cleanInput() {
@@ -17,7 +16,7 @@ export default function NewTaskModal({ isOpen, onRequestClose }) {
   }
 
   function handleSubmit(currentTask, currentDescription) {
-    createTask(currentTask, currentDescription, myToken);
+    createTask(currentTask, currentDescription);
     cleanInput();
     onRequestClose();
   }

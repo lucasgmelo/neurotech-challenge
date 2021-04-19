@@ -7,14 +7,14 @@ import { Todo } from '../styles/global';
 
 export default function Content({ onOpenNewTaskModal }) {
   const [error, setError] = useState('');
-  const myToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODgwNDU5NywiZXhwIjoxNjE4ODkwOTk3fQ.arjkk_E7cVeTwd4xAE-vnUnft9wfxAs0x_WsUTMkldI';
   const {
-    tasks, getTasks, deleteTask, userData,
+    tasks, getTasks, deleteTask, username, getUser,
   } = useTasks();
   const mobile = useMedia('(max-width: 720px)');
 
   useEffect(() => {
-    getTasks(myToken);
+    getUser();
+    getTasks();
   }, []);
 
   return (
@@ -25,7 +25,7 @@ export default function Content({ onOpenNewTaskModal }) {
           <h1>
             Olá,
             {' '}
-            {userData.name || 'Lucas'}
+            {username}
             !
           </h1>
         </header>
@@ -50,8 +50,8 @@ export default function Content({ onOpenNewTaskModal }) {
           </button>
         </div>
         <Tasklist>
-          {tasks.map((task) => (
-            <Todo key={task._id}>
+          {tasks?.map((task) => (
+            <Todo key={task?._id}>
               <div>
                 <h2>{task?.title}</h2>
                 <p>{task?.description}</p>
@@ -62,7 +62,7 @@ export default function Content({ onOpenNewTaskModal }) {
               </div>
               <button
                 type="button"
-                onClick={() => deleteTask(task?._id, myToken)}
+                onClick={() => deleteTask(task?._id)}
               >
                 <FiTrash size={18} />
               </button>

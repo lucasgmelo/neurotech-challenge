@@ -30,7 +30,6 @@ export default function Login() {
           event.preventDefault();
           try {
             login(email, password);
-            getUser();
             history.push('/dashboard');
           } catch (e) {
             setError(e.message);
