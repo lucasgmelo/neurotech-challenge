@@ -35,7 +35,7 @@ export const DashboardContainer = styled.div`
   grid-template-columns: 30% 70%;
 
   background: var(--bg-dark);
-  height: 43rem;
+  height: 35rem;
 
   margin: 2rem;
   border-radius: 8px;
@@ -48,6 +48,7 @@ export const DashboardContainer = styled.div`
   @media (max-width: 720px) {
     display: flex;
     flex-direction: column;
+    height: 43rem;
   }
 `;
 
