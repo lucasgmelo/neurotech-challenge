@@ -29,6 +29,20 @@ const LoginContainer = styled.div`
     flex-direction: column;
   }
 
+
+@media (max-width: 720px) {
+  & > img {
+    grid-column: 2;
+    grid-row: 1;
+    
+    align-self: flex-start;
+  }
+
+  & > form {
+    grid-column: 1/3;
+  }
+}
+
 `;
 
 export default LoginContainer;

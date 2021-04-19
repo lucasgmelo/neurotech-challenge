@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FiTrash } from 'react-icons/fi';
+import useMedia from '../hooks/useMedia';
 import { useTasks } from '../hooks/useTasks';
 import { MyAside, Main, Tasklist } from '../styles/dashboardStyles';
 import { Todo } from '../styles/global';
@@ -10,6 +11,7 @@ export default function Content({ onOpenNewTaskModal }) {
   const {
     tasks, getTasks, deleteTask, userData, validateToken,
   } = useTasks();
+  const mobile = useMedia('(max-width: 720px)');
 
   useEffect(() => {
     // getTasks(myToken);
@@ -28,6 +30,7 @@ export default function Content({ onOpenNewTaskModal }) {
             !
           </h1>
         </header>
+        { !mobile && (
         <footer>
           <img src="/images/medium_logo.svg" alt="" />
           <div>
@@ -35,6 +38,7 @@ export default function Content({ onOpenNewTaskModal }) {
             <p>seu to do app favorito :)</p>
           </div>
         </footer>
+        )}
       </MyAside>
       <Main>
         <div>
