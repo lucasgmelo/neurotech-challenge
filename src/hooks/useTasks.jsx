@@ -37,7 +37,7 @@ export function TasksProvider({ children }) {
       };
       const response = await api.post('/login', data);
       if (response.status === 200) {
-        getUser();
+        localStorage.setItem('doit_token', response.data.token);
         return true;
       }
       return false;

@@ -25,7 +25,7 @@ export default function Content({ onOpenNewTaskModal }) {
           <h1>
             Olá,
             {' '}
-            {userData.name}
+            {userData.name || 'Lucas'}
             !
           </h1>
         </header>

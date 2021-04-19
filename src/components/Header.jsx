@@ -8,7 +8,13 @@ export default function Header() {
   return (
     <MyHeader>
       <div>
-        <button type="button" onClick={() => history.push('/')}>
+        <button
+          type="button"
+          onClick={() => {
+            localStorage.removeItem('doit_token');
+            history.push('/');
+          }}
+        >
           <img src="/images/exit.svg" alt="Sair" />
           <p>Sair</p>
         </button>
