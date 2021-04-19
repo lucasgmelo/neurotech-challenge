@@ -23,5 +23,6 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 'off',
     'react/prop-types': 'off',
     'max-len': 'off',
+    'consistent-return': 'off',
   },
 };

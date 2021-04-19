@@ -3,6 +3,7 @@ import React, {
   useContext,
   useState,
 } from 'react';
+import swal from 'sweetalert2';
 import api from '../services/api';
 
 const TasksContext = createContext();
@@ -12,6 +13,12 @@ export function TasksProvider({ children }) {
   const [error, setError] = useState(false);
   const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
+
+  function logout() {
+    localStorage.removeItem('doit_token');
+    setTasks([]);
+    setUsername('');
+  }
 
   async function getUser() {
     const userId = JSON.parse(localStorage.getItem('doit_user_id'));
@@ -44,12 +51,6 @@ export function TasksProvider({ children }) {
     } catch (err) {
       return false;
     }
-  }
-
-  function logout() {
-    localStorage.removeItem('doit_token');
-    setTasks([]);
-    setUsername('');
   }
 
   async function login(email, password) {

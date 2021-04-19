@@ -7,7 +7,7 @@ import { DashboardContainer } from '../styles/dashboardStyles';
 
 export default function Dashboard({ onOpenNewTaskModal }) {
   const {
-    username, tasks, loading,
+    username, tasks,
   } = useTasks();
 
   return (
