@@ -24,6 +24,7 @@ export function TasksProvider({ children }) {
       }
       return false;
     } catch (err) {
+      console.log(err);
       setError(err.message);
       return false;
     }
@@ -77,7 +78,7 @@ export function TasksProvider({ children }) {
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await api.post('/todos', config, content);
+      const response = await api.post('/todos', content, config);
       if (response.status === 200) {
         getTasks(token);
         return true;
