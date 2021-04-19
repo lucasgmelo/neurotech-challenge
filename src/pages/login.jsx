@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTasks } from '../hooks/useTasks';
 import { Button, Error, Input } from '../styles/global';
@@ -9,7 +9,11 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { error, login } = useTasks();
+  const { error, setError, login } = useTasks();
+
+  useEffect(() => {
+    setError('');
+  }, []);
 
   return (
     <LoginContainer>
@@ -19,7 +23,7 @@ export default function Login() {
         onSubmit={(event) => {
           event.preventDefault();
           login(email, password);
-          history.push('/dashboard');
+          if (error !== '')history.push('/dashboard');
         }}
       >
         <label htmlFor="email">Email</label>
