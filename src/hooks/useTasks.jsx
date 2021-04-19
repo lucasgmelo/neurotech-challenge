@@ -9,6 +9,25 @@ const TasksContext = createContext();
 
 export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState('');
+
+  async function login(email, password) {
+    try {
+      const data = {
+        email,
+        password,
+      };
+      const response = await api.post('/login', data);
+      if (response.status === 200) {
+        console.log('logou!');
+        return true;
+      }
+      return false;
+    } catch (err) {
+      setError(err.message);
+      return false;
+    }
+  }
 
   async function getTasks(token) {
     try {
@@ -71,7 +90,7 @@ export function TasksProvider({ children }) {
 
   return (
     <TasksContext.Provider value={{
-      tasks, setTasks, getTasks, deleteTask, createTask,
+      tasks, setTasks, getTasks, deleteTask, createTask, login, error, setError,
     }}
     >
       {children}

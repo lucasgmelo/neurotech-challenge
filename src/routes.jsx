@@ -19,18 +19,18 @@ export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <Login />
-        </Route>
-        <Route path="/dashboard">
-          <TasksProvider>
+        <TasksProvider>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route path="/dashboard">
             <Dashboard onOpenNewTaskModal={handleOpenNewTaskModal} />
             <NewTaskModal
               isOpen={isNewTaskModalOpen}
               onRequestClose={handleCloseNewTaskModal}
             />
-          </TasksProvider>
-        </Route>
+          </Route>
+        </TasksProvider>
       </Switch>
     </BrowserRouter>
   );
