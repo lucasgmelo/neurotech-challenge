@@ -11,8 +11,14 @@ export default function NewTaskModal({ isOpen, onRequestClose }) {
   const myToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODgwNDU5NywiZXhwIjoxNjE4ODkwOTk3fQ.arjkk_E7cVeTwd4xAE-vnUnft9wfxAs0x_WsUTMkldI';
   const { createTask } = useTasks();
 
+  function cleanInput() {
+    setTask('');
+    setDescription('');
+  }
+
   function handleSubmit(currentTask, currentDescription) {
     createTask(currentTask, currentDescription, myToken);
+    cleanInput();
     onRequestClose();
   }
 
@@ -21,13 +27,19 @@ export default function NewTaskModal({ isOpen, onRequestClose }) {
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={onRequestClose}
+      onRequestClose={() => {
+        onRequestClose();
+        cleanInput();
+      }}
       overlayClassName="react-modal-overlay"
       className="react-modal-content"
     >
       <button
         type="submit"
-        onClick={onRequestClose}
+        onClick={() => {
+          onRequestClose();
+          cleanInput();
+        }}
         className="react-modal-close"
       >
         <img src="/images/close.svg" alt="Fechar modal" />
