@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import { createTask } from '../services/api';
+import { useTasks } from '../hooks/useTasks';
 import { Button, Error, Input } from '../styles/global';
 import ModalContainer from '../styles/newTaskModal';
 
@@ -9,6 +9,7 @@ export default function NewTaskModal({ isOpen, onRequestClose }) {
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
   const myToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODc4OTk3MiwiZXhwIjoxNjE4ODc2MzcyfQ.nop5fBGeGCYW-C6B_2TbJaGrIJtsi06hHS-F-VmCUKM';
+  const { createTask } = useTasks();
 
   function handleSubmit(currentTask, currentDescription) {
     createTask(currentTask, currentDescription, myToken);

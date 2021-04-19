@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { FiTrash } from 'react-icons/fi';
-import { getTasks, deleteTask } from '../services/api';
+import { useTasks } from '../hooks/useTasks';
 import { MyAside, Main, Tasklist } from '../styles/dashboardStyles';
 import { Todo } from '../styles/global';
 
 export default function Content({ onOpenNewTaskModal }) {
-  const [tasks, setTasks] = useState([]);
   const [error, setError] = useState('');
   const myToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODc4OTk3MiwiZXhwIjoxNjE4ODc2MzcyfQ.nop5fBGeGCYW-C6B_2TbJaGrIJtsi06hHS-F-VmCUKM';
+  const { tasks, getTasks, deleteTask } = useTasks();
 
   useEffect(() => {
     getTasks(myToken);
