@@ -9,7 +9,7 @@ const TasksContext = createContext();
 
 export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(false);
 
   async function login(email, password) {
     try {
@@ -19,12 +19,10 @@ export function TasksProvider({ children }) {
       };
       const response = await api.post('/login', data);
       if (response.status === 200) {
-        console.log('logou!');
         return true;
       }
       return false;
     } catch (err) {
-      console.log(err);
       setError(err.message);
       return false;
     }

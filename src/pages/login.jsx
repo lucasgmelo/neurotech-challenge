@@ -11,10 +11,6 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const { error, setError, login } = useTasks();
 
-  useEffect(() => {
-    setError('');
-  }, []);
-
   return (
     <LoginContainer>
       <strong>do it!</strong>
@@ -23,7 +19,10 @@ export default function Login() {
         onSubmit={(event) => {
           event.preventDefault();
           login(email, password);
-          if (error !== '')history.push('/dashboard');
+          if (!error) {
+            history.push('/dashboard');
+            setError(false);
+          }
         }}
       >
         <label htmlFor="email">Email</label>
