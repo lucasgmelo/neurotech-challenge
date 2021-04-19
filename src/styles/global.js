@@ -211,3 +211,15 @@ export const Error = styled.p`
   font-weight: 600;
   color: #5CEDAE ;
 `;
+
+export const NotAllowedContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  grid-row: 1/3;
+  grid-column: 1/3;
+
+  text-align: center;
+`;

@@ -62,6 +62,8 @@ export function TasksProvider({ children }) {
         localStorage.setItem('doit_token', JSON.stringify(response.data.token));
         localStorage.setItem('doit_user_id', JSON.stringify(response.data.user._id));
         getTasks();
+        getUser();
+        setError(false);
         return true;
       }
       return false;
