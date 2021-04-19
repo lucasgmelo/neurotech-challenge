@@ -9,7 +9,9 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { error, setError, login } = useTasks();
+  const {
+    error, setError, login, getUser,
+  } = useTasks();
 
   return (
     <LoginContainer>
@@ -18,10 +20,12 @@ export default function Login() {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          login(email, password);
-          if (!error) {
+          try {
+            login(email, password);
+            getUser();
             history.push('/dashboard');
-            setError(false);
+          } catch (e) {
+            setError(e.message);
           }
         }}
       >

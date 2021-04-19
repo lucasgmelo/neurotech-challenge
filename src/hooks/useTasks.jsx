@@ -10,6 +10,20 @@ const TasksContext = createContext();
 export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(false);
+  const [userData, setUserData] = useState('');
+
+  async function getUser() {
+    try {
+      const response = await api.get('/users/607a60d09d576213acdf2b68');
+      if (response.status === 200) {
+        // setUserData(response.data);
+        return true;
+      }
+      return false;
+    } catch (err) {
+      return false;
+    }
+  }
 
   async function login(email, password) {
     try {
@@ -19,6 +33,7 @@ export function TasksProvider({ children }) {
       };
       const response = await api.post('/login', data);
       if (response.status === 200) {
+        getUser();
         return true;
       }
       return false;
@@ -47,7 +62,7 @@ export function TasksProvider({ children }) {
     }
   }
 
-  const deleteTask = async (id, token) => {
+  async function deleteTask(id, token) {
     try {
       const config = {
         headers: {
@@ -63,9 +78,9 @@ export function TasksProvider({ children }) {
     } catch (err) {
       return false;
     }
-  };
+  }
 
-  const createTask = async (currentTask, currentDescription, token) => {
+  async function createTask(currentTask, currentDescription, token) {
     try {
       // const token = localStorage.getItem('doit_token');
       const content = {
@@ -85,11 +100,11 @@ export function TasksProvider({ children }) {
     } catch (err) {
       return false;
     }
-  };
+  }
 
   return (
     <TasksContext.Provider value={{
-      tasks, setTasks, getTasks, deleteTask, createTask, login, error, setError,
+      tasks, setTasks, getTasks, deleteTask, createTask, login, error, setError, userData, getUser,
     }}
     >
       {children}
