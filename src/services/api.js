@@ -6,10 +6,12 @@ const api = axios.create({
 });
 
 api.interceptors.response.use(
-  (response) => response,
+  (response) => console.log(response),
   (err) => {
     if (err.response.status === 401) {
-      swal({
+      console.log('token expirado');
+      // window.location = '/';
+      swal.fire({
         title: 'Sessão expirada',
         text: 'Sua sessão foi expirada. Você gostaria de ser redirecionado para a página de login??',
         type: 'warning',
@@ -18,10 +20,9 @@ api.interceptors.response.use(
         confirmButtonText: 'Sim',
         closeOnConfirm: false,
         background: '#16161c',
-      }, () => {
-        window.location = '/login';
       });
     } else {
+      console.log('token expirado');
       return Promise.reject(err);
     }
   },
