@@ -7,18 +7,23 @@ import ModalContainer from '../styles/newTaskModal';
 export default function NewTaskModal({ isOpen, onRequestClose }) {
   const [task, setTask] = useState('');
   const [description, setDescription] = useState('');
-  const [error, setError] = useState('');
-  const { createTask } = useTasks();
+  const { createTask, err, setErr } = useTasks();
 
   function cleanInput() {
     setTask('');
     setDescription('');
   }
 
-  function handleSubmit(currentTask, currentDescription) {
-    createTask(currentTask, currentDescription);
-    cleanInput();
-    onRequestClose();
+  function handleSubmit(currentTask, currentDescription, event) {
+    event.preventDefault();
+    try {
+      setErr('');
+      createTask(currentTask, currentDescription);
+      cleanInput();
+      if (err !== '') onRequestClose();
+    } catch (e) {
+      console.log(e.response.data);
+    }
   }
 
   Modal.setAppElement('#root');
@@ -44,8 +49,8 @@ export default function NewTaskModal({ isOpen, onRequestClose }) {
         <img src="/images/close.svg" alt="Fechar modal" />
       </button>
       <ModalContainer
-        onSubmit={() => {
-          handleSubmit(task, description);
+        onSubmit={(event) => {
+          handleSubmit(task, description, event);
         }}
       >
         <h1>Adicionar tarefa</h1>
@@ -65,7 +70,7 @@ export default function NewTaskModal({ isOpen, onRequestClose }) {
           value={description}
           onChange={({ target }) => setDescription(target.value)}
         />
-        <Error>{error}</Error>
+        <Error>{err}</Error>
         <Button>Adicionar</Button>
       </ModalContainer>
     </Modal>

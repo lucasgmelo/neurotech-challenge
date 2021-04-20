@@ -138,7 +138,7 @@ export function TasksProvider({ children }) {
       }
       return false;
     } catch (error) {
-      console.log(error);
+      setErr('Já existe uma tarefa com essa descrição.');
       return false;
     }
   }
