@@ -11,7 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const mobile = useMedia('(max-width: 720px)');
   const {
-    error, setError, login,
+    err, setErr, login,
   } = useTasks();
 
   function handleOpenSignUpModal() {
@@ -48,7 +48,7 @@ export default function Login() {
             login(email, password);
             cleanInput();
           } catch (e) {
-            setError(e.response.message);
+            setErr(e.response.message);
           }
         }}
       >
@@ -67,7 +67,7 @@ export default function Login() {
           onChange={({ target }) => setPassword(target.value)}
         />
         <Error>
-          {error}
+          {err}
         </Error>
         <Button>
           Continuar

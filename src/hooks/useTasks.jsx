@@ -73,7 +73,7 @@ export function TasksProvider({ children }) {
       return false;
     } catch (error) {
       console.log(error);
-      setErr(error);
+      setErr(error.response.data);
       return false;
     }
   }
@@ -95,8 +95,7 @@ export function TasksProvider({ children }) {
       console.log(response);
       return false;
     } catch (error) {
-      console.log(error.response.message);
-      setErr(error);
+      setErr(error.response.data);
       return false;
     }
   }
