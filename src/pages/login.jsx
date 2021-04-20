@@ -65,10 +65,6 @@ export default function Login() {
         </Error>
         <Button>
           Continuar
-          {' '}
-          {email}
-          {' '}
-          {password }
         </Button>
         <a onClick={handleOpenSignUpModal}>Ainda não tem uma conta? Cadastre-se</a>
       </form>

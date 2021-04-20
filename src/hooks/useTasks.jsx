@@ -24,10 +24,9 @@ export function TasksProvider({ children }) {
     const userId = JSON.parse(localStorage.getItem('doit_user_id'));
     try {
       const response = await api.get(`/users/${userId}`);
-      console.log(response);
       if (response.status === 200) {
         setUsername(response.data.name);
-        setLoading(false);
+        // setLoading(false);
         return true;
       }
       return false;
@@ -46,15 +45,14 @@ export function TasksProvider({ children }) {
         },
       };
       const response = await api.get('/todos', config);
-      console.log(response);
       if (response.status === 200) {
         setTasks(response.data);
-        setLoading(false);
+        // await setLoading(false);
         return true;
       }
       return false;
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
       return false;
     }
   }

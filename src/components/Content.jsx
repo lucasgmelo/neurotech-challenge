@@ -13,6 +13,8 @@ export default function Content({ onOpenNewTaskModal }) {
   const mobile = useMedia('(max-width: 720px)');
 
   useEffect(() => {
+    getTasks();
+    getUser();
   }, []);
 
   return (
