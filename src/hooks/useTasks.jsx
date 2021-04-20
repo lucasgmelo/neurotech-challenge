@@ -46,7 +46,7 @@ export function TasksProvider({ children }) {
       const response = await api.get('/todos', config);
       if (response.status === 200) {
         setTasks(response.data);
-        // setLoading(false);
+        setLoading(false);
         return true;
       }
       return false;
