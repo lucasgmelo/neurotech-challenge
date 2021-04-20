@@ -7,10 +7,22 @@ const api = axios.create({
 
 api.interceptors.response.use(
   (response) => response,
-  async (err) => {
-    if (err.response.status === 401) {
+  async (error) => {
+    if (error.response) {
+      // Request made and server responded
+      console.log(error.response.data);
+      // console.log(error.response.status);
+      // console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      // console.log('Error', error.message);
+    }
+    if (error.response.status === 401) {
       const { isConfirmed } = await Swal.fire({
-        title: 'Sessão expirada',
+        title: `${error.message}`,
         text: 'Sua sessão foi expirada. Você gostaria de ser redirecionado para a página de login?',
         showCancelButton: false,
         allowEscapeKey: false,
@@ -26,7 +38,7 @@ api.interceptors.response.use(
         localStorage.removeItem('doit_user_id');
       }
     } else {
-      return Promise.reject(err);
+      return Promise.reject(error);
     }
   },
 );

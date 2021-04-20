@@ -11,6 +11,18 @@ const LoginContainer = styled.div`
   margin: 2rem 0 0;
   border-radius: 8px;
 
+  a {
+    max-width: 375px;
+    color: #ee69ac;
+    text-align: center;
+    font-size: .9rem;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(0.8);
+      }
+  }
+
   strong {
     font-size: 4rem;
   }

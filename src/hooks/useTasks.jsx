@@ -3,14 +3,14 @@ import React, {
   useContext,
   useState,
 } from 'react';
-import swal from 'sweetalert2';
+import { useHistory } from 'react-router-dom';
 import api from '../services/api';
 
 const TasksContext = createContext();
 
 export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
-  const [error, setError] = useState(false);
+  const [err, setErr] = useState('');
   const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -30,7 +30,8 @@ export function TasksProvider({ children }) {
         return true;
       }
       return false;
-    } catch (err) {
+    } catch (error) {
+      console.log(error);
       return false;
     }
   }
@@ -50,12 +51,14 @@ export function TasksProvider({ children }) {
         return true;
       }
       return false;
-    } catch (err) {
+    } catch (error) {
+      console.log(error);
       return false;
     }
   }
 
   async function login(email, password) {
+    const history = useHistory();
     try {
       const data = {
         email,
@@ -67,12 +70,36 @@ export function TasksProvider({ children }) {
         localStorage.setItem('doit_user_id', JSON.stringify(response.data.user._id));
         getTasks();
         getUser();
-        setError(false);
+        setErr('');
+        history.push('/dashboard');
         return true;
       }
       return false;
-    } catch (err) {
-      setError(err.message);
+    } catch (error) {
+      console.log(error);
+      setErr(error);
+      return false;
+    }
+  }
+
+  async function signUp(email, password, name) {
+    try {
+      const data = {
+        name,
+        email,
+        password,
+      };
+      const response = await api.post('/users', data);
+      if (response.status === 200) {
+        console.log(response);
+        login(email, password);
+        setErr('');
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.log(error);
+      setErr(error);
       return false;
     }
   }
@@ -91,7 +118,8 @@ export function TasksProvider({ children }) {
         return true;
       }
       return false;
-    } catch (err) {
+    } catch (error) {
+      console.log(error);
       return false;
     }
   }
@@ -113,14 +141,15 @@ export function TasksProvider({ children }) {
         return true;
       }
       return false;
-    } catch (err) {
+    } catch (error) {
+      console.log(error);
       return false;
     }
   }
 
   return (
     <TasksContext.Provider value={{
-      tasks, setTasks, getTasks, deleteTask, createTask, login, error, setError, username, getUser, logout, loading,
+      tasks, setTasks, getTasks, deleteTask, createTask, login, err, setErr, username, getUser, logout, loading, signUp,
     }}
     >
       {children}
