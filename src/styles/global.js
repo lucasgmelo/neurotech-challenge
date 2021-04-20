@@ -75,6 +75,17 @@ h1, label {
     font-weight: 600;
 }
 
+.swal2-timer-progress-bar-container{
+}
+
+.swal2-timer-progress-bar{
+  background: #eee;
+}
+
+.swal2-popup.swal2-toast {
+  box-shadow: none;
+}
+
 .swal2-title {
   color: #ee69ac;
 }
