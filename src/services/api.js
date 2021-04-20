@@ -11,8 +11,8 @@ api.interceptors.response.use(
     if (error.response) {
       // Request made and server responded
       console.log(error.response.data);
-      // console.log(error.response.status);
-      // console.log(error.response.headers);
+      console.log(error.response.status);
+      console.log(error.response.headers);
     } else if (error.request) {
       // The request was made but no response was received
       // console.log(error.request);
@@ -38,7 +38,7 @@ api.interceptors.response.use(
         localStorage.removeItem('doit_user_id');
       }
     } else {
-      // return Promise.reject(error);
+      return Promise.reject(error);
     }
   },
 );
