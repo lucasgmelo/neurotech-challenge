@@ -3,6 +3,7 @@ import React, {
   useContext,
   useState,
 } from 'react';
+import Swal from 'sweetalert2';
 import api from '../services/api';
 
 const TasksContext = createContext();
@@ -111,6 +112,23 @@ export function TasksProvider({ children }) {
       const response = await api.delete(`/todos/${id}`, config);
       if (response.status === 200) {
         getTasks();
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          background: '#16161c',
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: 'success',
+          title: response.data,
+        });
         return true;
       }
       return false;
@@ -134,6 +152,7 @@ export function TasksProvider({ children }) {
       const response = await api.post('/todos', content, config);
       if (response.status === 200) {
         getTasks();
+        setErr('');
         return true;
       }
       return false;
