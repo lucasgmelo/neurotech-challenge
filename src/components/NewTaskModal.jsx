@@ -17,12 +17,11 @@ export default function NewTaskModal({ isOpen, onRequestClose }) {
   function handleSubmit(currentTask, currentDescription, event) {
     event.preventDefault();
     try {
-      setErr('');
       createTask(currentTask, currentDescription);
       cleanInput();
-      if (err !== '') onRequestClose();
+      if (err === '') onRequestClose();
     } catch (e) {
-      console.log(e.response.data);
+      console.log('err');
     }
   }
 
