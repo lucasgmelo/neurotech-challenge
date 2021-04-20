@@ -38,7 +38,7 @@ api.interceptors.response.use(
         localStorage.removeItem('doit_user_id');
       }
     } else {
-      return Promise.reject(error);
+      // return Promise.reject(error);
     }
   },
 );

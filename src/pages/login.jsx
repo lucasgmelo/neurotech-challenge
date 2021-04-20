@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import useMedia from '../hooks/useMedia';
 import { useTasks } from '../hooks/useTasks';
 import { Button, Error, Input } from '../styles/global';
@@ -8,8 +7,12 @@ import SignUpModal from '../components/SignUpModal';
 
 export default function Login() {
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const mobile = useMedia('(max-width: 720px)');
-  const history = useHistory();
+  const {
+    error, setError, login,
+  } = useTasks();
 
   function handleOpenSignUpModal() {
     setIsSignUpModalOpen(true);
@@ -18,12 +21,6 @@ export default function Login() {
   function handleCloseSignUpModal() {
     setIsSignUpModalOpen(false);
   }
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const {
-    error, setError, login,
-  } = useTasks();
 
   return (
     <LoginContainer>
@@ -44,9 +41,8 @@ export default function Login() {
           event.preventDefault();
           try {
             login(email, password);
-            if (error !== '') history.push('/dashboard');
           } catch (e) {
-            setError(e.message);
+            setError(e.response.message);
           }
         }}
       >
@@ -67,7 +63,13 @@ export default function Login() {
         <Error>
           {error}
         </Error>
-        <Button>Continuar</Button>
+        <Button>
+          Continuar
+          {' '}
+          {email}
+          {' '}
+          {password }
+        </Button>
         <a onClick={handleOpenSignUpModal}>Ainda não tem uma conta? Cadastre-se</a>
       </form>
     </LoginContainer>

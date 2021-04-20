@@ -3,7 +3,6 @@ import React, {
   useContext,
   useState,
 } from 'react';
-import { useHistory } from 'react-router-dom';
 import api from '../services/api';
 
 const TasksContext = createContext();
@@ -12,7 +11,7 @@ export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
   const [err, setErr] = useState('');
   const [username, setUsername] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   function logout() {
     localStorage.removeItem('doit_token');
@@ -25,8 +24,10 @@ export function TasksProvider({ children }) {
     const userId = JSON.parse(localStorage.getItem('doit_user_id'));
     try {
       const response = await api.get(`/users/${userId}`);
+      console.log(response);
       if (response.status === 200) {
         setUsername(response.data.name);
+        setLoading(false);
         return true;
       }
       return false;
@@ -45,6 +46,7 @@ export function TasksProvider({ children }) {
         },
       };
       const response = await api.get('/todos', config);
+      console.log(response);
       if (response.status === 200) {
         setTasks(response.data);
         setLoading(false);
@@ -57,21 +59,19 @@ export function TasksProvider({ children }) {
     }
   }
 
-  async function login(email, password) {
-    const history = useHistory();
+  async function login(currentEmail, currentPassword) {
     try {
       const data = {
-        email,
-        password,
+        email: currentEmail,
+        password: currentPassword,
       };
       const response = await api.post('/login', data);
+      console.log(response, data);
       if (response.status === 200) {
         localStorage.setItem('doit_token', JSON.stringify(response.data.token));
         localStorage.setItem('doit_user_id', JSON.stringify(response.data.user._id));
-        getTasks();
-        getUser();
-        setErr('');
-        history.push('/dashboard');
+        setLoading(true);
+        window.location = '/dashboard';
         return true;
       }
       return false;
@@ -96,9 +96,10 @@ export function TasksProvider({ children }) {
         setErr('');
         return true;
       }
+      console.log(response);
       return false;
     } catch (error) {
-      console.log(error);
+      console.log(error.response.message);
       setErr(error);
       return false;
     }
@@ -114,7 +115,7 @@ export function TasksProvider({ children }) {
       };
       const response = await api.delete(`/todos/${id}`, config);
       if (response.status === 200) {
-        getTasks(token);
+        getTasks();
         return true;
       }
       return false;
@@ -137,7 +138,7 @@ export function TasksProvider({ children }) {
       };
       const response = await api.post('/todos', content, config);
       if (response.status === 200) {
-        getTasks(token);
+        getTasks();
         return true;
       }
       return false;

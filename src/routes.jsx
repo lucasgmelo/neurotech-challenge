@@ -17,9 +17,9 @@ export default function Routes() {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <TasksProvider>
+    <TasksProvider>
+      <BrowserRouter>
+        <Switch>
           <Route exact path="/">
             <Login />
           </Route>
@@ -30,8 +30,8 @@ export default function Routes() {
               onRequestClose={handleCloseNewTaskModal}
             />
           </Route>
-        </TasksProvider>
-      </Switch>
-    </BrowserRouter>
+        </Switch>
+      </BrowserRouter>
+    </TasksProvider>
   );
 }
