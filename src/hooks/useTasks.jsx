@@ -12,7 +12,7 @@ export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(false);
   const [username, setUsername] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   function logout() {
     localStorage.removeItem('doit_token');
@@ -46,6 +46,7 @@ export function TasksProvider({ children }) {
       const response = await api.get('/todos', config);
       if (response.status === 200) {
         setTasks(response.data);
+        // setLoading(false);
         return true;
       }
       return false;
@@ -119,7 +120,7 @@ export function TasksProvider({ children }) {
 
   return (
     <TasksContext.Provider value={{
-      tasks, setTasks, getTasks, deleteTask, createTask, login, error, setError, username, getUser, logout,
+      tasks, setTasks, getTasks, deleteTask, createTask, login, error, setError, username, getUser, logout, loading,
     }}
     >
       {children}

@@ -1,19 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Content from '../components/Content';
 import Header from '../components/Header';
-import NotAllowed from '../components/NotAllowed';
+import Loading from '../components/Loading';
 import { useTasks } from '../hooks/useTasks';
 import { DashboardContainer } from '../styles/dashboardStyles';
 
 export default function Dashboard({ onOpenNewTaskModal }) {
   const {
-    username, tasks,
+    loading,
   } = useTasks();
 
   return (
     <DashboardContainer>
-      <Header />
-      <Content onOpenNewTaskModal={onOpenNewTaskModal} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header />
+          <Content onOpenNewTaskModal={onOpenNewTaskModal} />
+        </>
+      )}
     </DashboardContainer>
   );
 }
