@@ -37,7 +37,7 @@ export const DashboardContainer = styled.div`
   background: var(--bg-dark);
   height: 35rem;
 
-  margin: 2rem;
+  margin: 0 2rem;
   border-radius: 8px;
 
   & > header {

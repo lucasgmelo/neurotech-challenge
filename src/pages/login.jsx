@@ -22,6 +22,11 @@ export default function Login() {
     setIsSignUpModalOpen(false);
   }
 
+  function cleanInput() {
+    setEmail('');
+    setPassword('');
+  }
+
   return (
     <LoginContainer>
       <SignUpModal
@@ -41,6 +46,7 @@ export default function Login() {
           event.preventDefault();
           try {
             login(email, password);
+            cleanInput();
           } catch (e) {
             setError(e.response.message);
           }

@@ -26,7 +26,6 @@ export function TasksProvider({ children }) {
       const response = await api.get(`/users/${userId}`);
       if (response.status === 200) {
         setUsername(response.data.name);
-        // setLoading(false);
         return true;
       }
       return false;
@@ -47,7 +46,6 @@ export function TasksProvider({ children }) {
       const response = await api.get('/todos', config);
       if (response.status === 200) {
         setTasks(response.data);
-        // await setLoading(false);
         return true;
       }
       return false;
@@ -148,7 +146,7 @@ export function TasksProvider({ children }) {
 
   return (
     <TasksContext.Provider value={{
-      tasks, setTasks, getTasks, deleteTask, createTask, login, err, setErr, username, getUser, logout, loading, signUp,
+      tasks, setTasks, getTasks, deleteTask, createTask, login, err, setErr, username, getUser, logout, loading, setLoading, signUp,
     }}
     >
       {children}
