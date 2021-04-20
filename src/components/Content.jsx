@@ -8,13 +8,14 @@ import { Todo } from '../styles/global';
 export default function Content({ onOpenNewTaskModal }) {
   const [error, setError] = useState('');
   const {
-    tasks, getTasks, deleteTask, username, getUser,
+    tasks, getTasks, deleteTask, username, getUser, setErr,
   } = useTasks();
   const mobile = useMedia('(max-width: 720px)');
 
   useEffect(() => {
     getTasks();
     getUser();
+    setErr('');
   }, []);
 
   return (

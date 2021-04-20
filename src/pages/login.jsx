@@ -27,6 +27,10 @@ export default function Login() {
     setPassword('');
   }
 
+  useEffect(() => {
+    setErr('');
+  }, []);
+
   return (
     <LoginContainer>
       <SignUpModal
