@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { useTasks } from '../hooks/useTasks';
 import { Button, Error, Input } from '../styles/global';
-import ModalContainer from '../styles/newTaskModal';
+import ModalContainer from '../styles/modalStyles';
 
 export default function NewTaskModal({ isOpen, onRequestClose }) {
   const [task, setTask] = useState('');
   const [description, setDescription] = useState('');
-  const { createTask, err, setErr } = useTasks();
+  const { createTask, err } = useTasks();
+  let status;
 
   function cleanInput() {
     setTask('');
@@ -16,13 +17,9 @@ export default function NewTaskModal({ isOpen, onRequestClose }) {
 
   function handleSubmit(currentTask, currentDescription, event) {
     event.preventDefault();
-    try {
-      createTask(currentTask, currentDescription);
-      cleanInput();
-      if (err === '') onRequestClose();
-    } catch (e) {
-      console.log('err');
-    }
+    status = createTask(currentTask, currentDescription);
+    cleanInput();
+    if (status) onRequestClose();
   }
 
   Modal.setAppElement('#root');

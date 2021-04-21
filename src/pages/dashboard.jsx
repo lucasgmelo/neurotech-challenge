@@ -1,25 +1,32 @@
-import React from 'react';
-import Content from '../components/Content';
-import Header from '../components/Header';
-import Loading from '../components/Loading';
+import React, { useState } from 'react';
 import { useTasks } from '../hooks/useTasks';
 import { DashboardContainer } from '../styles/dashboardStyles';
+import {
+  Content, Header, NewTaskModal,
+} from '../components';
 
-export default function Dashboard({ onOpenNewTaskModal }) {
+export default function Dashboard() {
+  const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState(false);
   const {
     loading,
   } = useTasks();
 
+  function handleOpenNewTaskModal() {
+    setIsNewTaskModalOpen(true);
+  }
+
+  function handleCloseNewTaskModal() {
+    setIsNewTaskModalOpen(false);
+  }
+
   return (
     <DashboardContainer>
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          <Header />
-          <Content onOpenNewTaskModal={onOpenNewTaskModal} />
-        </>
-      )}
+      <NewTaskModal
+        isOpen={isNewTaskModalOpen}
+        onRequestClose={handleCloseNewTaskModal}
+      />
+      <Header />
+      <Content onOpenNewTaskModal={handleOpenNewTaskModal} />
     </DashboardContainer>
   );
 }

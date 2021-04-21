@@ -11,7 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const mobile = useMedia('(max-width: 720px)');
   const {
-    err, setErr, login,
+    err, login,
   } = useTasks();
 
   function handleOpenSignUpModal() {
@@ -28,7 +28,6 @@ export default function Login() {
   }
 
   useEffect(() => {
-    setErr('');
   }, []);
 
   return (
@@ -48,12 +47,8 @@ export default function Login() {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          try {
-            login(email, password);
-            cleanInput();
-          } catch (e) {
-            setErr(e.response.message);
-          }
+          login(email, password);
+          cleanInput();
         }}
       >
         <label htmlFor="email">Email</label>

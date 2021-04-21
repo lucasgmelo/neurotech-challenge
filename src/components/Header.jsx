@@ -5,7 +5,7 @@ import { MyHeader } from '../styles/dashboardStyles';
 
 export default function Header() {
   const history = useHistory();
-  const { logout, getTasks } = useTasks();
+  const { logout } = useTasks();
 
   return (
     <MyHeader>

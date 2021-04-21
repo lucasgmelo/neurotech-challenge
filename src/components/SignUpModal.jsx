@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { Button, Error, Input } from '../styles/global';
-import ModalContainer from '../styles/newTaskModal';
+import ModalContainer from '../styles/modalStyles';
 import { useTasks } from '../hooks/useTasks';
 
 export default function NewTaskModal({ isOpen, onRequestClose }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
-  const [error, setError] = useState('');
   const { signUp } = useTasks();
 
   function cleanInput() {
@@ -78,7 +77,6 @@ export default function NewTaskModal({ isOpen, onRequestClose }) {
           value={password}
           onChange={({ target }) => setPassword(target.value)}
         />
-        <Error>{error}</Error>
         <Button>
           Cadastrar
         </Button>

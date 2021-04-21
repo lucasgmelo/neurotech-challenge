@@ -6,23 +6,21 @@ import { Main, MyAside, Tasklist } from '../styles/dashboardStyles';
 import { Todo } from '../styles/global';
 
 export default function Content({ onOpenNewTaskModal }) {
-  const [error, setError] = useState('');
   const {
-    tasks, getTasks, deleteTask, username, getUser, setErr,
+    tasks, getTasks, deleteTask, username, getUser,
   } = useTasks();
   const mobile = useMedia('(max-width: 720px)');
 
   useEffect(() => {
     getTasks();
     getUser();
-    setErr('');
   }, []);
 
   return (
     <>
       <MyAside>
         <header>
-          {!mobile && <img src="/images/profile.svg" alt="foto do perfil: emoji sorrindo" />}
+          {!mobile && <img src="/images/profile.svg" alt="Foto do perfil: emoji sorrindo" />}
           <h1>
             Olá,
             {' '}
@@ -35,7 +33,9 @@ export default function Content({ onOpenNewTaskModal }) {
           <img src="/images/medium_logo.svg" alt="" />
           <div>
             <strong>do it!</strong>
-            <p>seu to do app favorito :)</p>
+            <p>
+              seu to do app favorito :&#41;
+            </p>
           </div>
         </footer>
         )}
@@ -69,7 +69,6 @@ export default function Content({ onOpenNewTaskModal }) {
               </button>
             </Todo>
           ))}
-          {error}
         </Tasklist>
       </Main>
     </>

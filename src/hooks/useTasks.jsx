@@ -12,7 +12,6 @@ export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
   const [err, setErr] = useState('');
   const [username, setUsername] = useState('');
-  const [loading, setLoading] = useState(false);
 
   function logout() {
     localStorage.removeItem('doit_token');
@@ -31,7 +30,6 @@ export function TasksProvider({ children }) {
       }
       return false;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
@@ -51,7 +49,6 @@ export function TasksProvider({ children }) {
       }
       return false;
     } catch (error) {
-      console.log(error.response.data);
       return false;
     }
   }
@@ -63,17 +60,15 @@ export function TasksProvider({ children }) {
         password: currentPassword,
       };
       const response = await api.post('/login', data);
-      console.log(response, data);
       if (response.status === 200) {
+        setErr('');
         localStorage.setItem('doit_token', JSON.stringify(response.data.token));
         localStorage.setItem('doit_user_id', JSON.stringify(response.data.user._id));
-        setLoading(true);
         window.location = '/dashboard';
         return true;
       }
       return false;
     } catch (error) {
-      console.log(error);
       setErr(error.response.data);
       return false;
     }
@@ -88,12 +83,10 @@ export function TasksProvider({ children }) {
       };
       const response = await api.post('/users', data);
       if (response.status === 200) {
-        console.log(response);
         login(email, password);
         setErr('');
         return true;
       }
-      console.log(response);
       return false;
     } catch (error) {
       setErr(error.response.data);
@@ -133,7 +126,6 @@ export function TasksProvider({ children }) {
       }
       return false;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
@@ -181,7 +173,7 @@ export function TasksProvider({ children }) {
 
   return (
     <TasksContext.Provider value={{
-      tasks, setTasks, getTasks, deleteTask, createTask, login, err, setErr, username, getUser, logout, loading, setLoading, signUp,
+      tasks, setTasks, getTasks, deleteTask, createTask, login, err, setErr, username, getUser, logout, signUp,
     }}
     >
       {children}
