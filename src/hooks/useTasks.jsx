@@ -109,7 +109,7 @@ export function TasksProvider({ children }) {
           toast: true,
           position: 'top-end',
           showConfirmButton: false,
-          timer: 3000,
+          timer: 2000,
           timerProgressBar: true,
           background: '#16161c',
           didOpen: (toast) => {
@@ -144,12 +144,11 @@ export function TasksProvider({ children }) {
       const response = await api.post('/todos', content, config);
       if (response.status === 200) {
         getTasks();
-        setErr('');
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
           showConfirmButton: false,
-          timer: 3000,
+          timer: 2000,
           timerProgressBar: true,
           background: '#16161c',
           didOpen: (toast) => {

@@ -7,7 +7,9 @@ import ModalContainer from '../styles/modalStyles';
 export default function NewTaskModal({ isOpen, onRequestClose }) {
   const [task, setTask] = useState('');
   const [description, setDescription] = useState('');
-  const { createTask, err } = useTasks();
+  const {
+    createTask, err,
+  } = useTasks();
   let status;
 
   function cleanInput() {
@@ -15,9 +17,9 @@ export default function NewTaskModal({ isOpen, onRequestClose }) {
     setDescription('');
   }
 
-  function handleSubmit(currentTask, currentDescription, event) {
+  async function handleSubmit(currentTask, currentDescription, event) {
     event.preventDefault();
-    status = createTask(currentTask, currentDescription);
+    status = await createTask(currentTask, currentDescription);
     cleanInput();
     if (status) onRequestClose();
   }
@@ -66,7 +68,7 @@ export default function NewTaskModal({ isOpen, onRequestClose }) {
           value={description}
           onChange={({ target }) => setDescription(target.value)}
         />
-        <Error>{err}</Error>
+        {!status && <Error>{err}</Error>}
         <Button>Adicionar</Button>
       </ModalContainer>
     </Modal>

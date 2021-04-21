@@ -7,7 +7,7 @@ import { Todo } from '../styles/global';
 
 export default function Content({ onOpenNewTaskModal }) {
   const {
-    tasks, getTasks, deleteTask, username, getUser,
+    tasks, getTasks, deleteTask, username, getUser, setErr,
   } = useTasks();
   const mobile = useMedia('(max-width: 720px)');
 
@@ -45,7 +45,10 @@ export default function Content({ onOpenNewTaskModal }) {
           <h1>Minhas tasks</h1>
           <button
             type="submit"
-            onClick={onOpenNewTaskModal}
+            onClick={() => {
+              onOpenNewTaskModal();
+              setErr('');
+            }}
           >
             +
           </button>
