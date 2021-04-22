@@ -42,16 +42,20 @@ export default function Content({ onOpenNewTaskModal }) {
       </MyAside>
       <Main>
         <div>
-          <h1>Minhas tasks</h1>
-          <button
-            type="submit"
-            onClick={() => {
-              onOpenNewTaskModal();
-              setErr('');
-            }}
-          >
-            +
-          </button>
+          <h1>Minhas tarefas</h1>
+          <div className="btnContainer">
+            {tasks.length === 0 && <span>Crie uma nova tarefa! </span>}
+
+            <button
+              type="submit"
+              onClick={() => {
+                onOpenNewTaskModal();
+                setErr('');
+              }}
+            >
+              +
+            </button>
+          </div>
         </div>
         <Tasklist>
           {tasks?.map((task) => (

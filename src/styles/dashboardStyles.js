@@ -1,4 +1,16 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const jump = keyframes`
+
+  from {
+    transform: translateY(-2px);
+  }
+
+  to {
+    transform: translateY(1px);
+
+  }
+`;
 
 export const MyHeader = styled.header`
   height: 60px;
@@ -92,9 +104,28 @@ export const Main = styled.main`
   padding: 2rem 1rem;
   flex: 1;
 
+  .btnContainer {
+    display: flex;
+    align-items: center;
+    margin-top: -0.5rem;
+
+    span {
+      margin-right: 1rem;
+      color: #d7d7d7;
+      font-size: 0.8rem;
+      animation: ${jump} .7s ease-in infinite;
+      animation-direction: alternate;
+
+      @media (max-width: 720px) {
+        margin-top: -0.5rem;
+      }
+    }
+  }
+
   & > div {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     h1 {
       margin-bottom: 1rem;
