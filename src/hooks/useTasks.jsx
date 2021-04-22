@@ -101,7 +101,7 @@ export function TasksProvider({ children }) {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${expiredToken}`,
+          Authorization: `Bearer ${token}`,
         },
       };
       const response = await api.delete(`/todos/${id}`, config);
