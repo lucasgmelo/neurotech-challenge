@@ -12,12 +12,14 @@ export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
   const [err, setErr] = useState('');
   const [username, setUsername] = useState('');
+  const expiredToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwN2E2MGQwOWQ1NzYyMTNhY2RmMmI2OCIsImlhdCI6MTYxODcxOTAzMywiZXhwIjoxNjE4ODA1NDMzfQ.ZW9d3-eHWkGwp-fGQZG5LUczOfAkeWnquClr4f_wfGg';
 
   function logout() {
     localStorage.removeItem('doit_token');
     localStorage.removeItem('doit_user_id');
     setTasks([]);
     setUsername('');
+    setErr('');
   }
 
   async function getUser() {
@@ -99,7 +101,7 @@ export function TasksProvider({ children }) {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${expiredToken}`,
         },
       };
       const response = await api.delete(`/todos/${id}`, config);
