@@ -11,7 +11,7 @@ api.interceptors.response.use(
     if (error.response.status === 401 && window.location.href === '/dashboard') {
       const { isConfirmed } = await Swal.fire({
         title: `${error.message}`,
-        text: 'Sua sessão foi expirada. Você gostaria de ser redirecionado para a página de login?',
+        text: 'Sua sessão foi expirada. Você gostaria de fazer o login novamente?',
         showCancelButton: false,
         allowEscapeKey: false,
         allowOutsideClick: false,
