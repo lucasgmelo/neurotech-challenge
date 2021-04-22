@@ -8,9 +8,9 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response.status === 401 && window.location.href === '/dashboard') {
+    if (error.response.status === 401 && window.location.href === 'http://localhost:3000/dashboard') {
       const { isConfirmed } = await Swal.fire({
-        title: `${error.message}`,
+        title: 'Ocorreu um erro :(',
         text: 'Sua sessão foi expirada. Você gostaria de fazer o login novamente?',
         showCancelButton: false,
         allowEscapeKey: false,
